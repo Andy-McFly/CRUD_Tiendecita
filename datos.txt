@@ -1,0 +1,4 @@
+com.mysql.cj.jdbc.Driver
+jdbc:mysql://localhost/tiendecitaamr
+root
+Studium2024;
