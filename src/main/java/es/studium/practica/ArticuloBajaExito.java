@@ -10,13 +10,34 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para el mensaje de Artículo Eliminado con éxito
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloBajaExito 
 {
-	//VENTANA BAJA COMLETADA
+	/**
+	 * Ventana de Mensaje
+	 */
+	private JFrame vExitoBajaArticulo;
+	/**
+	 * Botón Aceptar, vuelve al menú Artículos y cierra el mensaje
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public ArticuloBajaExito(JFrame vPrincipal) 
 	{
-		JFrame vExitoBajaArticulo = new JFrame();
-		vExitoBajaArticulo.addWindowListener(new WindowAdapter() {
+		vExitoBajaArticulo = new JFrame();
+		vExitoBajaArticulo.addWindowListener(new WindowAdapter() 
+		{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				new Articulos(vPrincipal);
@@ -31,9 +52,10 @@ public class ArticuloBajaExito
 		lblExitoBajaArticulo.setBounds(84, 49, 330, 25);
 		vExitoBajaArticulo.getContentPane().add(lblExitoBajaArticulo);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent ev) {
 				new Articulos(vPrincipal);
 				vExitoBajaArticulo.dispose();
 			}
@@ -47,7 +69,6 @@ public class ArticuloBajaExito
 		vExitoBajaArticulo.setSize(514,259);
 		vExitoBajaArticulo.setLocationRelativeTo(null);
 		vExitoBajaArticulo.setResizable(false);
-		
 		
 		vExitoBajaArticulo.setVisible(true);
 		vExitoBajaArticulo.requestFocusInWindow();

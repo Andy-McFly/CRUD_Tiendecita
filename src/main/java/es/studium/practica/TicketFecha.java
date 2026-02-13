@@ -12,14 +12,48 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
+/**
+ * Clase para introducir el intervalo de fechas
+ * 
+ * @author Andrés Martínez Romero
+ * @since 22/1/2026
+ * @version 1.2
+ * 
+ */
 public class TicketFecha 
 {
+	/**
+	 * Ventana para introducir las fechas
+	 */
+	private JFrame vFecha;
+	/**
+	 * Botón Aceptar, guarda las fechas y abre la ventana con el listado de tickets
+	 */
+	private JButton btnAceptar;
+	/**
+	 * Campo de texto para escribir la fecha de inicio
+	 */
 	private JTextField txfFechaDesde;
+	/**
+	 * Campo de texto para escribir la fecha de fin
+	 */
 	private JTextField txfFechaHasta;
+	/**
+	 * Valor de la fecha de inicio del intervalo
+	 */
+	private String fechaDesde;
+	/**
+	 * Valor de la fecha de fin del intervalo
+	 */
+	private String fechaHasta;
 	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public TicketFecha(JFrame vPrincipal) 
 	{
-		JFrame vFecha = new JFrame();
+		vFecha = new JFrame();
 		vFecha.getContentPane().setBackground(new Color(204, 204, 255));
 		vFecha.addWindowListener(new WindowAdapter() 
 		{
@@ -47,12 +81,13 @@ public class TicketFecha
 		lblFechaHasta.setBounds(73, 131, 89, 20);
 		vFecha.getContentPane().add(lblFechaHasta);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String fechaDesde = txfFechaDesde.getText();
-				String fechaHasta = txfFechaHasta.getText();
+				fechaDesde = txfFechaDesde.getText();
+				fechaHasta = txfFechaHasta.getText();
 				
 				if(!fechaDesde.isBlank() && !fechaHasta.isBlank()) 
 				{
@@ -81,7 +116,6 @@ public class TicketFecha
 		lblInfoFecha.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lblInfoFecha.setBounds(97, 32, 170, 20);
 		vFecha.getContentPane().add(lblInfoFecha);
-		
 		
 		vFecha.setVisible(true);
 	}

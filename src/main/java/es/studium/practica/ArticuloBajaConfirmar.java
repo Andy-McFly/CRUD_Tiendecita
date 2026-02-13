@@ -10,14 +10,41 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para confirmar la Baja de Artículos
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloBajaConfirmar 
 {
-	//VENTANA CONFIRMAR BAJA
+	/**
+	 * Objeto de la clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de confirmar Baja Artículo
+	 */
+	private JFrame vConfBajaArticulo;
+	/**
+	 * Botón Aceptar, procede con la baja y llama al mensaje de éxito o error
+	 */
+	private JButton btnAceptar;
+	/**
+	 * Botón Cancelar, cancela la operación de baja y vuelve al menú Baja de Artículos
+	 */
+	private JButton btnCancelar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param idArticulo Entero, Código ID de Artículo
+	 */
 	public ArticuloBajaConfirmar(JFrame vPrincipal, int idArticulo) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vConfBajaArticulo = new JFrame();
+		vConfBajaArticulo = new JFrame();
 		vConfBajaArticulo.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -46,13 +73,11 @@ public class ArticuloBajaConfirmar
 		lblConfBaja2.setBounds(140, 101, 234, 25);
 		vConfBajaArticulo.getContentPane().add(lblConfBaja2);
 		
-		//Botón "Aceptar".
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				//Procede con la baja.
 				if(modelo.bajaArticulo(idArticulo)) 
 				{
 					new ArticuloBajaExito(vPrincipal);
@@ -71,10 +96,10 @@ public class ArticuloBajaConfirmar
 		btnAceptar.setBounds(96, 167, 116, 45);
 		vConfBajaArticulo.getContentPane().add(btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new ArticuloBaja(vPrincipal);
 				vConfBajaArticulo.dispose();
@@ -85,7 +110,6 @@ public class ArticuloBajaConfirmar
 		btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
 		btnCancelar.setBounds(304, 167, 116, 45);
 		vConfBajaArticulo.getContentPane().add(btnCancelar);
-		
 		
 		vConfBajaArticulo.setVisible(true);
 		vConfBajaArticulo.requestFocusInWindow();

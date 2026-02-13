@@ -12,12 +12,43 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para introducir el nombre del autor y proceder con la creación del informe
+ * 
+ * @author Andrés Martínez Romero
+ * @since 22/1/2026
+ * @version 1.2
+ * 
+ */
 public class NombreAutor 
 {
+	/**
+	 * Ventana
+	 */
+	private JFrame vNombre;
+	/**
+	 * Botón Aceptar, crea el informe con su nombre y los parámetros
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Campo de texto para escribir el nombre
+	 */
 	private JTextField txfNombre;
+	/**
+	 * Autor introducido por el usuario
+	 */
+	private String nombre;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param informe Cadena, nombre del informe
+	 * @param parametros Lista, listado clave-valor con los parámetros para el informe
+	 */
 	public NombreAutor(JFrame vPrincipal,String informe,  HashMap<String, Object> parametros) 
 	{
-		JFrame vNombre = new JFrame();
+		vNombre = new JFrame();
 		vNombre.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -45,11 +76,12 @@ public class NombreAutor
 		vNombre.getContentPane().add(txfNombre);
 		txfNombre.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String nombre = txfNombre.getText();
+				nombre = txfNombre.getText();
 				
 				if(!nombre.isBlank()) 
 				{
@@ -62,7 +94,6 @@ public class NombreAutor
 		btnAceptar.setFont(new Font("Arial", Font.BOLD, 14));
 		btnAceptar.setBounds(78, 119, 114, 30);
 		vNombre.getContentPane().add(btnAceptar);
-		
 		
 		vNombre.setVisible(true);
 		

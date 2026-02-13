@@ -12,14 +12,50 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para mostrar los datos del Ticket
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class TicketConsultarDatos 
 {
-	//VENTANA DATOS TICKET
+	/**
+	 * Objeto de la Clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana con los datos del ticket
+	 */
+	private JFrame vDatosTicket;
+	/**
+	 * Área de texto con las líneas del ticket
+	 */
+	private JTextArea textArea;
+	/**
+	 * Fecha de expedición del ticket
+	 */
+	private String fecha;
+	/**
+	 * Precio total del ticket
+	 */
+	private String total;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (selección de ticket)
+	 */
+	private JButton btnVolver;
+	
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param idTicket Entero, Código ID del Ticket
+	 */
 	public TicketConsultarDatos(JFrame vPrincipal, int idTicket) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vDatosTicket = new JFrame();
+		vDatosTicket = new JFrame();
 		vDatosTicket.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -47,7 +83,7 @@ public class TicketConsultarDatos
 		lblTicketID.setBounds(275, 48, 122, 20);
 		vDatosTicket.getContentPane().add(lblTicketID);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		//Llama al método para rellenar el área de texto con las líneas del ticket.
 		modelo.rellenarTextArea(textArea, idTicket);
@@ -76,16 +112,16 @@ public class TicketConsultarDatos
 		vDatosTicket.getContentPane().add(lblTotal);
 		
 		//Consulta los datos del ticket para rellenar las etiquetas correspondientes.
-		String fecha = modelo.datosTickets(idTicket, "fechaTicket");
-		String total = modelo.datosTickets(idTicket, "totalTicket");
+		fecha = modelo.datosTickets(idTicket, "fechaTicket");
+		total = modelo.datosTickets(idTicket, "totalTicket");
 		lblTicketID.setText("ID " + idTicket);
 		lblFecha.setText(modelo.fechaEuropea(fecha));
 		lblTotal.setText(total + " €");
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new TicketConsultar(vPrincipal);
 				vDatosTicket.dispose();
@@ -96,7 +132,6 @@ public class TicketConsultarDatos
 		btnVolver.setBackground(Color.BLACK);
 		btnVolver.setBounds(438, 371, 95, 31);
 		vDatosTicket.getContentPane().add(btnVolver);
-		
 		
 		vDatosTicket.setVisible(true);
 		vDatosTicket.requestFocusInWindow();

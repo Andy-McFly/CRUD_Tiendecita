@@ -11,16 +11,65 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para la Edición del Artículo seleccionado
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloModificarEditar 
 {
+	/**
+	 * Objeto de la clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de Editar Artículo
+	 */
+	private JFrame vEditarArticulo;
+	/**
+	 * Campo de texto para indicar una descripción o nombre del artículo
+	 */
 	private JTextField txfDescripcion;
+	/**
+	 * Campo de texto para indicar el precio del artículo
+	 */
 	private JTextField txfPrecio;
+	/**
+	 * Campo de texto para indicar el Stock en almacén
+	 */
 	private JTextField txfStock;
+	/**
+	 * Descripción del artículo en la Base de Datos
+	 */
+	private String descripcion;
+	/**
+	 * Precio del artículo por unidad en la Base de Datos
+	 */
+	private String precio;
+	/**
+	 * Stock del artículo en la Base de Datos
+	 */
+	private String stock;
+	/**
+	 * Botón Modificar, guarda los datos modificados en los campos de texto y llama al mensaje de confirmación o error
+	 */
+	private JButton btnModificar;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Modificar Artículos)
+	 */
+	private JButton btnVolver;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param idArticulo Entero, Código ID de Artículo
+	 */
 	public ArticuloModificarEditar(JFrame vPrincipal, int idArticulo) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vEditarArticulo = new JFrame();
+		vEditarArticulo = new JFrame();
 		vEditarArticulo.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -76,14 +125,14 @@ public class ArticuloModificarEditar
 		txfStock.setBounds(249, 200, 66, 31);
 		vEditarArticulo.getContentPane().add(txfStock);
 		
-		String descripcion = modelo.datosArticulo(idArticulo, "descripcionArticulo");
-		String precio = modelo.datosArticulo(idArticulo, "precioArticulo");
-		String stock = modelo.datosArticulo(idArticulo, "cantidadArticulo");
+		descripcion = modelo.datosArticulo(idArticulo, "descripcionArticulo");
+		precio = modelo.datosArticulo(idArticulo, "precioArticulo");
+		stock = modelo.datosArticulo(idArticulo, "cantidadArticulo");
 		txfDescripcion.setText(descripcion);
 		txfPrecio.setText(precio);
 		txfStock.setText(stock);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -119,10 +168,10 @@ public class ArticuloModificarEditar
 		btnModificar.setBounds(182, 270, 153, 69);
 		vEditarArticulo.getContentPane().add(btnModificar);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new ArticuloModificar(vPrincipal);
 				vEditarArticulo.dispose();
@@ -133,7 +182,6 @@ public class ArticuloModificarEditar
 		btnVolver.setBackground(Color.BLACK);
 		btnVolver.setBounds(416, 383, 95, 31);
 		vEditarArticulo.getContentPane().add(btnVolver);
-		
 		
 		vEditarArticulo.setVisible(true);
 		vEditarArticulo.requestFocusInWindow();

@@ -9,11 +9,45 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para el menú de gestión de Tickets
+ * 
+ * @author Andrés Martínez Romero
+ * @since 22/1/2026
+ * @version 1.2
+ * 
+ */
 public class Tickets 
 {
+	/**
+	 * Ventana Tickets
+	 */
+	private JFrame vTickets;
+	/**
+	 * Botón Nuevo Ticket, abre la ventana para el alta de Tickets
+	 */
+	private JButton btnNuevoTicket;
+	/**
+	 * Botón Consultar Ticket, abre la ventana para seleccionar un ticket y ver sus datos
+	 */
+	private JButton btnConsultarTicket;
+	/**
+	 * Botón Lista de Tickets, abre la ventana para introducir el intervalo de fechas
+	 */
+	private JButton btnListaTicket;
+	/**
+	 * Botón Volver, Vuelve a la ventana anterior (Principal)
+	 */
+	private JButton btnVolverTicket;
+	
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public Tickets(JFrame vPrincipal) 
 	{
-		JFrame vTickets = new JFrame();
+		vTickets = new JFrame();
 		vTickets.getContentPane().setBackground(new Color(102, 102, 102));
 		vTickets.addWindowListener(new WindowAdapter() {
 			@Override
@@ -29,7 +63,7 @@ public class Tickets
 		vTickets.setResizable(false);
 		vTickets.getContentPane().setLayout(null);
 		
-		JButton btnNuevoTicket = new JButton("Nuevo Ticket");
+		btnNuevoTicket = new JButton("Nuevo Ticket");
 		btnNuevoTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new TicketAlta(vPrincipal);
@@ -42,7 +76,7 @@ public class Tickets
 		btnNuevoTicket.setBounds(153, 50, 216, 103);
 		vTickets.getContentPane().add(btnNuevoTicket);
 		
-		JButton btnConsultarTicket = new JButton("Consultar Ticket");
+		btnConsultarTicket = new JButton("Consultar Ticket");
 		btnConsultarTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new TicketConsultar(vPrincipal);
@@ -54,9 +88,9 @@ public class Tickets
 		btnConsultarTicket.setBounds(153, 192, 216, 61);
 		vTickets.getContentPane().add(btnConsultarTicket);
 		
-		JButton btnVolverTicket = new JButton("Volver");
+		btnVolverTicket = new JButton("Volver");
 		btnVolverTicket.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent ev) {
 				vPrincipal.setVisible(true);
 				vTickets.dispose();
 			}
@@ -67,7 +101,7 @@ public class Tickets
 		btnVolverTicket.setBounds(416, 383, 95, 31);
 		vTickets.getContentPane().add(btnVolverTicket);
 		
-		JButton btnListaTicket = new JButton("Lista de Tickets");
+		btnListaTicket = new JButton("Lista de Tickets");
 		btnListaTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new TicketFecha(vPrincipal);
@@ -77,7 +111,6 @@ public class Tickets
 		btnListaTicket.setFont(new Font("Arial", Font.BOLD, 20));
 		btnListaTicket.setBounds(153, 292, 216, 61);
 		vTickets.getContentPane().add(btnListaTicket);
-		
 		
 		vTickets.setVisible(true);
 		vTickets.requestFocusInWindow();

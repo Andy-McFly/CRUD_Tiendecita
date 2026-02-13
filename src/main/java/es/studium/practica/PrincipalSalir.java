@@ -11,12 +11,36 @@ import javax.swing.JLabel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Clase para el mensaje de confirmar salir
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class PrincipalSalir 
 {
-	//VENTANA CONFIRMAR SALIR
+	/**
+	 * Ventana del mensaje
+	 */
+	private JFrame vConfSalir;
+	/**
+	 * Botón Sí, cierra el programa
+	 */
+	private JButton btnSalirSi;
+	/**
+	 * Botón No, vuelve al menú principal
+	 */
+	private JButton btnSalirNo;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public PrincipalSalir(JFrame vPrincipal) 
 	{
-		JFrame vConfSalir = new JFrame();
+		vConfSalir = new JFrame();
 		vConfSalir.getContentPane().setBackground(new Color(220, 220, 220));
 		vConfSalir.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		vConfSalir.addWindowListener(new WindowAdapter() {
@@ -32,7 +56,7 @@ public class PrincipalSalir
 		vConfSalir.setResizable(false);
 		vConfSalir.getContentPane().setLayout(null);
 		
-		JButton btnSalirSi = new JButton("Sí");
+		btnSalirSi = new JButton("Sí");
 		btnSalirSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -44,7 +68,7 @@ public class PrincipalSalir
 		btnSalirSi.setBounds(116, 136, 93, 33);
 		vConfSalir.getContentPane().add(btnSalirSi);
 		
-		JButton btnSalirNo = new JButton("No");
+		btnSalirNo = new JButton("No");
 		btnSalirNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				vPrincipal.setVisible(true);
@@ -61,7 +85,6 @@ public class PrincipalSalir
 		lblConfSalir.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblConfSalir.setBounds(141, 51, 227, 25);
 		vConfSalir.getContentPane().add(lblConfSalir);
-		
 		
 		vConfSalir.setVisible(true);
 		vConfSalir.requestFocusInWindow();

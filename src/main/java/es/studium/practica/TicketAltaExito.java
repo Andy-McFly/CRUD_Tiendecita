@@ -10,12 +10,32 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para el mensaje de Ticket Registrado con éxito
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class TicketAltaExito 
 {
-	//VENTANA REGISTRO COMPLETADO (Ticket)
+	/**
+	 * Ventana de Mensaje de éxito en el Alta
+	 */
+	private JFrame vExitoAltaTicket;
+	/**
+	 * Botón Aceptar, vuelve al menú Tickets y cierra el mensaje
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public TicketAltaExito(JFrame vPrincipal) 
 	{
-		JFrame vExitoAltaTicket = new JFrame();
+		vExitoAltaTicket = new JFrame();
 		vExitoAltaTicket.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -31,8 +51,7 @@ public class TicketAltaExito
 		vExitoAltaTicket.setLocationRelativeTo(null);
 		vExitoAltaTicket.setResizable(false);
 		vExitoAltaTicket.getContentPane().setLayout(null);
-		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -51,7 +70,6 @@ public class TicketAltaExito
 		lblExitoAltaTicket.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblExitoAltaTicket.setBounds(106, 44, 282, 25);
 		vExitoAltaTicket.getContentPane().add(lblExitoAltaTicket);
-		
 		
 		vExitoAltaTicket.setVisible(true);
 		vExitoAltaTicket.requestFocusInWindow();

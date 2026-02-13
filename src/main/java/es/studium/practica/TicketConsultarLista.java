@@ -14,13 +14,54 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
+/**
+ * Clase para mostrar el listado de tickets dentro de las fechas establecidas
+ * 
+ * @author Andrés Martínez Romero
+ * @since 22/1/2026
+ * @version 1.2
+ * 
+ */
 public class TicketConsultarLista 
 {
+	/**
+	 * Objeto de la Clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana para mostrar el listado de tickets
+	 */
+	private JFrame vLista;
+	/**
+	 * Área de texto con el listado de tickets
+	 */
+	private JTextArea textArea;
+	/**
+	 * Botón Generar Informe, guarda el nombre del informe y sus parámetros, abre la ventana para introducir el autor
+	 */
+	private JButton btnInforme;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Tickets)
+	 */
+	private JButton btnVolverTicket;
+	/**
+	 * Nombre del informe para el archivo .jrxml
+	 */
+	private String informe;
+	/**
+	 * Lista de parámetros para el informe
+	 */
+	HashMap<String, Object> parametros;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param fechaDesde Cadena, fecha de inicio
+	 * @param fechaHasta Cadena, fecha de fin
+	 */
 	public TicketConsultarLista(JFrame vPrincipal, String fechaDesde, String fechaHasta) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vLista = new JFrame();
+		vLista = new JFrame();
 		vLista.getContentPane().setBackground(new Color(204, 204, 255));
 		vLista.addWindowListener(new WindowAdapter() 
 		{
@@ -38,19 +79,20 @@ public class TicketConsultarLista
 		vLista.setResizable(false);
 		vLista.getContentPane().setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setFont(new Font("Monospaced", Font.BOLD, 13));
 		modelo.consultarListaTickets(textArea, fechaDesde, fechaHasta);
 		textArea.setBounds(46, 32, 441, 131);
 		vLista.getContentPane().add(textArea);
 		
-		JButton btnInforme = new JButton("Generar Informe");
-		btnInforme.addActionListener(new ActionListener() {
+		btnInforme = new JButton("Generar Informe");
+		btnInforme.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				if (!textArea.getText().isBlank()) 
 				{
-					String informe = "infTickets";
+					informe = "infTickets";
 					HashMap<String, Object> parametros = new HashMap<>();
 
 					try 
@@ -83,9 +125,10 @@ public class TicketConsultarLista
 		btnInforme.setBounds(192, 202, 156, 43);
 		vLista.getContentPane().add(btnInforme);
 		
-		JButton btnVolverTicket = new JButton("Volver");
-		btnVolverTicket.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
+		btnVolverTicket = new JButton("Volver");
+		btnVolverTicket.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new Tickets(vPrincipal);
 				vLista.dispose();
@@ -96,7 +139,6 @@ public class TicketConsultarLista
 		btnVolverTicket.setBackground(Color.BLACK);
 		btnVolverTicket.setBounds(429, 270, 95, 31);
 		vLista.getContentPane().add(btnVolverTicket);
-		
 		
 		vLista.setVisible(true);
 		

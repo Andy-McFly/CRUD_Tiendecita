@@ -17,17 +17,56 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Clase para el alta de Tickets
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class TicketAlta 
 {
+	/**
+	 * Objeto de la Clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de Alta Ticket
+	 */
+	private JFrame vAltaTicket;
+	/**
+	 * Botón Crear Ticket, crea el nuevo ticket, registra sus líneas y llama al mensaje de éxito o error
+	 */
+	private JButton btnCrear;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Tickets)
+	 */
+	private JButton btnVolver;
+	/**
+	 * Campo de texto con la fecha actual
+	 */
 	private JTextField txfFecha;
-	double precioTotal = 0;
+	/**
+	 * Listado de artículos disponibles en la base de datos
+	 */
+	private List listArticulos;
+	/**
+	 * Listado de artículos añadidos al comprobante
+	 */
+	private List listComprobante;
+	/**
+	 * Precio total del ticket
+	 */
+	private double precioTotal = 0;
 	
-	//VENTANA NUEVO TICKET
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public TicketAlta(JFrame vPrincipal) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vAltaTicket = new JFrame();
+		vAltaTicket = new JFrame();
 		vAltaTicket.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		vAltaTicket.addWindowListener(new WindowAdapter() {
 			@Override
@@ -82,20 +121,20 @@ public class TicketAlta
 		vAltaTicket.getContentPane().add(txfFecha);
 		txfFecha.setColumns(10);
 		
-		List listArticulos = new List();
+		listArticulos = new List();
 		listArticulos.setFont(new Font("Calibri", Font.BOLD, 13));
 		//Llama al método para rellenar la lista de artículos.
 		modelo.listado(listArticulos);
 		listArticulos.setBounds(60, 66, 269, 182);
 		vAltaTicket.getContentPane().add(listArticulos);
 		
-		List listComprobante = new List();
+		listComprobante = new List();
 		listComprobante.setBackground(new Color(254, 255, 198));
 		listComprobante.setFont(new Font("Calibri", Font.BOLD, 13));
 		listComprobante.setBounds(465, 66, 269, 182);
 		vAltaTicket.getContentPane().add(listComprobante);
 		
-		//Añadir/Eliminar artículos del comprobante.
+		//Añadir o Eliminar artículos del comprobante.
 		listArticulos.addMouseListener(new MouseAdapter() 
 		{
 			@Override
@@ -138,8 +177,7 @@ public class TicketAlta
 			}
 		});
 		
-		//Botón "Crear Ticket".
-		JButton btnCrear = new JButton("Crear Ticket");
+		btnCrear = new JButton("Crear Ticket");
 		btnCrear.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -169,10 +207,10 @@ public class TicketAlta
 		btnCrear.setBounds(303, 381, 187, 53);
 		vAltaTicket.getContentPane().add(btnCrear);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new Tickets(vPrincipal);
 				vAltaTicket.dispose();
@@ -183,7 +221,6 @@ public class TicketAlta
 		btnVolver.setBackground(Color.BLACK);
 		btnVolver.setBounds(693, 451, 95, 31);
 		vAltaTicket.getContentPane().add(btnVolver);
-		
 		
 		vAltaTicket.setVisible(true);
 		vAltaTicket.requestFocusInWindow();

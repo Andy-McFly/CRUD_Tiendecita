@@ -11,12 +11,35 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase Principal del programa (Menú principal)
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class Principal
 {
-	//VENTANA PRINCIPAL
+	/**
+	 * Ventana del Menú Principal
+	 */
+	private JFrame vPrincipal;
+	/**
+	 * Botón Tickets, muestra el menú para la gestión de los Tickets
+	 */
+	private JButton btnTickets;
+	/**
+	 * Botón Artículos, muestra el menú para la gestión de los Artículos
+	 */
+	private JButton btnArticulos;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 */
 	public Principal() 
 	{
-		JFrame vPrincipal = new JFrame();
+		vPrincipal = new JFrame();
 		vPrincipal.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		vPrincipal.getContentPane().setBackground(new Color(102, 102, 102));
 		vPrincipal.addWindowListener(new WindowAdapter() 
@@ -40,7 +63,7 @@ public class Principal
 		lblMenuPrincipal.setBounds(185, 34, 150, 30);
 		vPrincipal.getContentPane().add(lblMenuPrincipal);
 		
-		JButton btnTickets = new JButton("Tickets");
+		btnTickets = new JButton("Tickets");
 		btnTickets.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -54,7 +77,7 @@ public class Principal
 		btnTickets.setBounds(177, 181, 164, 53);
 		vPrincipal.getContentPane().add(btnTickets);
 		
-		JButton btnArticulos = new JButton("Artículos");
+		btnArticulos = new JButton("Artículos");
 		btnArticulos.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -72,6 +95,10 @@ public class Principal
 		vPrincipal.requestFocusInWindow();
 	}
 
+	/**
+	 * Método principal del programa Tiendecita
+	 * @param args
+	 */
 	public static void main(String[] args) 
 	{
 		new Principal();

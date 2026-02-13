@@ -11,12 +11,32 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import java.awt.Color;
 
+/**
+ * Clase para el mensaje de Error de conexión
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class FalloConexion 
 {
-	//VENTANA FALLO EN LA CONEXIÓN
+	/**
+	 * Ventana del mensaje
+	 */
+	private JFrame vFalloConexion;
+	/**
+	 * Botón Aceptar, vuelve al menú Principal y cierra el mensaje
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public FalloConexion(JFrame vPrincipal) 
 	{
-		JFrame vFalloConexion = new JFrame();
+		vFalloConexion = new JFrame();
 		vFalloConexion.getContentPane().setBackground(new Color(220, 220, 220));
 		vFalloConexion.addWindowListener(new WindowAdapter() 
 		{
@@ -40,7 +60,7 @@ public class FalloConexion
 		lblErrorRelleneTodos.setBounds(103, 50, 300, 25);
 		vFalloConexion.getContentPane().add(lblErrorRelleneTodos);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -54,7 +74,6 @@ public class FalloConexion
 		btnAceptar.setBackground(new Color(102, 102, 102));
 		btnAceptar.setBounds(200, 131, 107, 38);
 		vFalloConexion.getContentPane().add(btnAceptar);
-		
 		
 		vFalloConexion.setVisible(true);
 		vFalloConexion.requestFocusInWindow();

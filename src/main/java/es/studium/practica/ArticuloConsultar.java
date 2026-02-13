@@ -11,14 +11,53 @@ import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para la Consulta de Artículos
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloConsultar 
 {
-	//VENTANA CONSULTAR ARTÍCULOS
+	/**
+	 * Objeto de la clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de Consultar Artículos
+	 */
+	private JFrame vConsultarArticulos;
+	/**
+	 * Área de texto que presenta el listado de artículos
+	 */
+	private JTextArea txaArticulos;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Artículos)
+	 */
+	private JButton btnVolver;
+	/**
+	 * Botón Generar Informe, Abre la ventana para introducir el nombre del autor del informe, 
+	 * enviándole el nombre del informe y los parámetros
+	 */
+	private JButton btnInforme;
+	/**
+	 * Nombre del archivo jrxml que usará la Clase Jaspersoft para generar el informe
+	 */
+	private String informe;
+	/**
+	 * Listado clave-valor con los parámetros para el informe
+	 */
+	HashMap<String, Object> parametros;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public ArticuloConsultar(JFrame vPrincipal) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vConsultarArticulos = new JFrame();
+		vConsultarArticulos = new JFrame();
 		vConsultarArticulos.getContentPane().setBackground(new Color(255, 204, 204));
 		vConsultarArticulos.addWindowListener(new WindowAdapter() 
 		{
@@ -36,7 +75,7 @@ public class ArticuloConsultar
 		vConsultarArticulos.setResizable(false);
 		vConsultarArticulos.getContentPane().setLayout(null);
 		
-		JTextArea txaArticulos = new JTextArea();
+		txaArticulos = new JTextArea();
 		txaArticulos.setBackground(new Color(233, 233, 233));
 		//Llama al método para rellenar el área de texto con los artículos.
 		modelo.consultarArticulos(txaArticulos);
@@ -45,10 +84,10 @@ public class ArticuloConsultar
 		txaArticulos.setBounds(10, 25, 650, 222);
 		vConsultarArticulos.getContentPane().add(txaArticulos);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new Articulos(vPrincipal);
 				vConsultarArticulos.dispose();
@@ -60,19 +99,19 @@ public class ArticuloConsultar
 		btnVolver.setBounds(565, 359, 95, 31);
 		vConsultarArticulos.getContentPane().add(btnVolver);
 		
-		JButton btnInforme = new JButton("Generar Informe");
-		btnInforme.addActionListener(new ActionListener() {
+		btnInforme = new JButton("Generar Informe");
+		btnInforme.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String informe = "infArticulos";
-				HashMap<String, Object> parametros = new HashMap<>();
+				informe = "infArticulos";
+				parametros = new HashMap<>();
 				new NombreAutor(vPrincipal, informe, parametros);
 			}
 		});
 		btnInforme.setFont(new Font("Arial", Font.BOLD, 14));
 		btnInforme.setBounds(258, 290, 156, 43);
 		vConsultarArticulos.getContentPane().add(btnInforme);
-		
 		
 		vConsultarArticulos.setVisible(true);
 		vConsultarArticulos.requestFocusInWindow();

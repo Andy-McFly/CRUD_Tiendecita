@@ -11,13 +11,48 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * Clase para seleccionar el Artículo a modificar
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloModificar 
 {
+	/**
+	 * Objeto de la clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de Modificar Artículos
+	 */
+	private JFrame vModificarArticulo;
+	/**
+	 * Desplegable con la lista de Artículos
+	 */
+	private JComboBox<String> cbArticulos;
+	/**
+	 * Botón Editar Datos, si hay seleccionado un artículo, abre la ventana para editar sus datos
+	 */
+	private JButton btnEditarDatos;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Artículos)
+	 */
+	private JButton btnVolver;
+	/**
+	 * Código ID del artículo
+	 */
+	private int idArticulo;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public ArticuloModificar(JFrame vPrincipal) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vModificarArticulo = new JFrame();
+		vModificarArticulo = new JFrame();
 		vModificarArticulo.setTitle("Modificar Artículo");
 		vModificarArticulo.addWindowListener(new WindowAdapter() 
 		{
@@ -35,21 +70,21 @@ public class ArticuloModificar
 		vModificarArticulo.setResizable(false);
 		vModificarArticulo.getContentPane().setLayout(null);
 		
-		JComboBox<String> cbArticulos = new JComboBox<>();
+		cbArticulos = new JComboBox<>();
 		cbArticulos.setModel(new DefaultComboBoxModel<>(new String[] {"Seleccione un artículo..."}));
 		modelo.rellenarArticulos(cbArticulos);
 		cbArticulos.setFont(new Font("Calibri", Font.PLAIN, 18));
 		cbArticulos.setBounds(125, 62, 267, 29);
 		vModificarArticulo.getContentPane().add(cbArticulos);
 		
-		JButton btnEditarDatos = new JButton("Editar Datos");
+		btnEditarDatos = new JButton("Editar Datos");
 		btnEditarDatos.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				if(cbArticulos.getSelectedIndex() != 0) 
 				{
-					int idArticulo = Integer.parseInt(cbArticulos.getSelectedItem().toString().split(" - ")[0]);
+					idArticulo = Integer.parseInt(cbArticulos.getSelectedItem().toString().split(" - ")[0]);
 					new ArticuloModificarEditar(vPrincipal, idArticulo);
 					vModificarArticulo.dispose();
 				}
@@ -65,10 +100,10 @@ public class ArticuloModificar
 		btnEditarDatos.setBounds(180, 185, 152, 54);
 		vModificarArticulo.getContentPane().add(btnEditarDatos);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new Articulos(vPrincipal);
 				vModificarArticulo.dispose();
@@ -79,7 +114,6 @@ public class ArticuloModificar
 		btnVolver.setBackground(Color.BLACK);
 		btnVolver.setBounds(416, 314, 95, 31);
 		vModificarArticulo.getContentPane().add(btnVolver);
-		
 		
 		vModificarArticulo.setVisible(true);
 		vModificarArticulo.requestFocusInWindow();

@@ -12,24 +12,63 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- * Ventana para el alta de Artículos
+ * Clase para el alta de Artículos
  * 
- * @author Andrés
+ * @author Andrés Martínez Romero
  * @since 1/10/2025
  * @version 1.2
+ * 
  */
 public class ArticuloAlta 
 {
+	/**
+	 * Objeto de la clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de Alta Artículo
+	 */
+	private JFrame vAltaArticulo;
+	/**
+	 * Campo de texto para indicar el Stock en almacén
+	 */
 	private JTextField txfStock;
+	/**
+	 * Campo de texto para indicar una descripción o nombre del artículo
+	 */
 	private JTextField txfDescripcion;
+	/**
+	 * Campo de texto para indicar el precio del artículo
+	 */
 	private JTextField txfPrecio;
+	/**
+	 * Botón Registrar, para dar de alta un artículo
+	 */
+	private JButton btnRegistrar;
+	/**
+	 * Botón Volver, vuelve a la ventana Artículos
+	 */
+	private JButton btnVolver;
+	/**
+	 * Descripción del artículo introducida por el usuario
+	 */
+	private String descripcionArticulo;
+	/**
+	 * Precio del artículo introducido por el usuario
+	 */
+	private double precioArticulo;
+	/**
+	 * Stock del artículo introducido por el usuario
+	 */
+	private int stockArticulo;
 	
-	//VENTANA REGISTRAR ARTÍCULO
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public ArticuloAlta(JFrame vPrincipal) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vAltaArticulo = new JFrame();
+		vAltaArticulo = new JFrame();
 		vAltaArticulo.setTitle("Registrar Artículo");
 		vAltaArticulo.getContentPane().setBackground(new Color(255, 204, 204));
 		vAltaArticulo.addWindowListener(new WindowAdapter() 
@@ -47,8 +86,7 @@ public class ArticuloAlta
 		vAltaArticulo.setResizable(false);
 		vAltaArticulo.getContentPane().setLayout(null);
 		
-		//Botón "Registrar".
-		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -56,9 +94,10 @@ public class ArticuloAlta
 				//Comprueba si se han rellenado todos los datos y asigna esos valores a las variables.
 				if(!txfDescripcion.getText().isBlank() && !txfPrecio.getText().isBlank() && !txfStock.getText().isBlank()) 
 				{
-					String descripcionArticulo = txfDescripcion.getText();
-					double precioArticulo = 0;
-					int stockArticulo = 0;
+					descripcionArticulo = txfDescripcion.getText();
+					precioArticulo = 0;
+					stockArticulo = 0;
+					
 					//Procede con el alta. Si hay fallo en el parseo, indicará al usuario que escriba valores válidos.
 					try 
 					{
@@ -92,13 +131,13 @@ public class ArticuloAlta
 		btnRegistrar.setFont(new Font("Arial", Font.BOLD, 18));
 		btnRegistrar.setBounds(182, 270, 153, 69);
 		vAltaArticulo.getContentPane().add(btnRegistrar);
-		
-		JButton btnVolver = new JButton("Volver");
+
+		btnVolver = new JButton("Volver");
 		btnVolver.setBackground(Color.BLACK);
 		btnVolver.setForeground(Color.WHITE);
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new Articulos(vPrincipal);
 				vAltaArticulo.dispose();
@@ -107,7 +146,7 @@ public class ArticuloAlta
 		btnVolver.setFont(new Font("Arial", Font.BOLD, 13));
 		btnVolver.setBounds(416, 383, 95, 31);
 		vAltaArticulo.getContentPane().add(btnVolver);
-		
+
 		JLabel lblDescripcion = new JLabel("Descripción:");
 		lblDescripcion.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblDescripcion.setBounds(138, 50, 101, 25);

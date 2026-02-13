@@ -11,12 +11,33 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import java.awt.Color;
 
+/**
+ * Clase para el mensaje de Error por falta de datos al registrar artículo
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloAltaFallo 
 {
-	//VENTANA FALLO EN EL REGISTRO (CAMPOS VACÍOS)
+	/**
+	 * Ventana de Mensaje
+	 */
+	private JFrame vFalloAltaArticulo;
+	/**
+	 * Botón Aceptar, vuelve al menú Alta Artículos y cierra el mensaje
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param vAltaArticulo JFrame, Ventana Alta Artículo
+	 */
 	public ArticuloAltaFallo(JFrame vPrincipal, JFrame vAltaArticulo) 
 	{
-		JFrame vFalloAltaArticulo = new JFrame();
+		vFalloAltaArticulo = new JFrame();
 		vFalloAltaArticulo.getContentPane().setBackground(new Color(220, 220, 220));
 		vFalloAltaArticulo.addWindowListener(new WindowAdapter() 
 		{
@@ -40,7 +61,7 @@ public class ArticuloAltaFallo
 		lblErrorRelleneTodos.setBounds(134, 50, 245, 25);
 		vFalloAltaArticulo.getContentPane().add(lblErrorRelleneTodos);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -54,7 +75,6 @@ public class ArticuloAltaFallo
 		btnAceptar.setBackground(new Color(102, 102, 102));
 		btnAceptar.setBounds(200, 131, 107, 38);
 		vFalloAltaArticulo.getContentPane().add(btnAceptar);
-		
 		
 		vFalloAltaArticulo.setVisible(true);
 		vFalloAltaArticulo.requestFocusInWindow();

@@ -12,12 +12,45 @@ import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
+/**
+ * Clase Modelo
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class Modelo 
 {
+	/**
+	 * Conexión a la base de datos
+	 */
 	Connection dbcon;
+	/**
+	 * Sentencia SQL
+	 */
 	Statement sentencia;
+	/**
+	 * Driver para la conexión
+	 */
+	private String driver;
+	/**
+	 * Dirección de la base de datos
+	 */
+	private String sourceURL;
+	/**
+	 * Usuario de la base de datos
+	 */
+	private String usuario;
+	/**
+	 * contraseña de la base de datos
+	 */
+	private String contraseña;
 
-	//Conexión con la Base de Datos.
+	/**
+	 * Constructor de la clase.
+	 * Establece la conexión a la BD accediendo con los datos del fichero externo datos.txt
+	 */
 	public Modelo() 
 	{
 		try 
@@ -25,11 +58,11 @@ public class Modelo
 			//Lectura de datos desde un fichero externo.
 			FileReader fr = new FileReader("datos.txt");
 			BufferedReader br = new BufferedReader(fr);
-			String driver = br.readLine();
+			driver = br.readLine();
 			Class.forName(driver);
-			String sourceURL = br.readLine();
-			String usuario = br.readLine();
-			String contraseña = br.readLine();
+			sourceURL = br.readLine();
+			usuario = br.readLine();
+			contraseña = br.readLine();
 			
 			//Acceso con los datos obtenidos.
 			dbcon = DriverManager.getConnection(sourceURL, usuario, contraseña);
@@ -42,13 +75,18 @@ public class Modelo
 		{
 			System.out.println("Error en al conectar");
 		} 
-		
 	}
 	
 	
 	//ARTÍCULOS.
 	
-	//Alta de artículo. Devuelve si se efectúa correctamente o no.
+	/**
+	 * Inserta un nuevo Artículo en la base de datos
+	 * @param descripcion Cadena, descripción del artículo
+	 * @param precio Decimal, precio por unidad del artículo
+	 * @param cantidad Entero, cantidad disponible en stock
+	 * @return Boolean, true si el artículo se insertó correctamente, false si ocurrió un error
+	 */
 	public boolean altaArticulo (String descripcion, double precio, int cantidad) 
 	{
 		boolean resultado = false;
@@ -67,7 +105,12 @@ public class Modelo
 		return resultado;
 	}
 	
-	//Baja de artículo. Devuelve si se efectúa correctamente o no.
+	/**
+	 * Elimina un Artículo permanentemente de la base de datos
+	 * Es un borrado en cascada, elimina también las líneas de tickets relacionadas con el artículo
+	 * @param idArticulo Entero, Código ID del artículo
+	 * @return Boolean, true si el artículo se eliminó correctamente, false si ocurrió un error
+	 */
 	public boolean bajaArticulo(int idArticulo)
 	{
 		boolean resultado = false;
@@ -88,7 +131,10 @@ public class Modelo
 		return resultado;
 	}
 	
-	//Baja de artículo. Borra las líneas del ticket en las que aparece el artículo (borrado en cascada).
+	/**
+	 * Elimina las líneas de los tickets que incluyan el artículo recibido
+	 * @param idArticuloFK Entero, Código ID del artículo relacionado en la línea
+	 */
 	public void borrarLinea(int idArticuloFK) 
 	{
 		try
@@ -103,7 +149,14 @@ public class Modelo
 		}
 	}
 	
-	//Modificar artículo. Devuelve si se efectúa correctamente o no.
+	/**
+	 * Modifica los campos de un Artículo de la base de datos
+	 * @param id Entero, Código ID del artículo
+	 * @param descripcion Cadena, descripción del artículo
+	 * @param precio Decimal, precio por unidad del artículo
+	 * @param stock Entero, cantidad disponible en stock
+	 * @return Boolean, true si el artículo se modificó correctamente, false si ocurrió un error
+	 */
 	public boolean modificarArticulo(int id, String descripcion, double precio, int stock)
 	{
 		boolean resultado = false;
@@ -122,7 +175,12 @@ public class Modelo
 		return resultado;
 	}
 	
-	//Rellenar datos para la ventana de Edición de artículo.
+	/**
+	 * Lee el valor del campo de un artículo desde la base de datos
+	 * @param idArticulo Entero, Código ID del artículo
+	 * @param campo Cadena, campo del que obtener el valor
+	 * @return Cadena, valor del campo
+	 */
 	public String datosArticulo(int idArticulo, String campo) 
 	{
 		String valor = "";
@@ -143,7 +201,10 @@ public class Modelo
 		return valor;
 	}
 	
-	//Consultar artículos. Añade a un área de texto una lista con los artículos de la base de datos.
+	/**
+	 * Consulta el listado de artículos en la base de datos y los añade al área de texto
+	 * @param txaArticulos Área de texto, muestra el listado de artículos
+	 */
 	public void consultarArticulos(JTextArea txaArticulos)
 	{
 		try
@@ -166,7 +227,11 @@ public class Modelo
 	
 	//TICKETS
 	
-	//Alta de tickets. Devuelve el ID del ticket recién registrado.
+	/**
+	 * Inserta un nuevo Ticket en la base de datos
+	 * @param total Decimal, precio total del ticket
+	 * @return Entero, Código ID del ticket recién insertado
+	 */
 	public int crearTicket(double total)
 	{
 		int idTicket = 0;
@@ -189,7 +254,11 @@ public class Modelo
 		return idTicket;
 	}
 	
-	//Alta de tickets. Añade las líneas con los artículos al ticket registrado.
+	/**
+	 * Inserta una nueva línea en el ticket
+	 * @param idTicket Entero, Código ID del Ticket
+	 * @param idArticulo Entero, Código ID del Artículo
+	 */
 	public void lineaTicket(int idTicket, int idArticulo) 
 	{
 		try
@@ -204,7 +273,10 @@ public class Modelo
 		}
 	}
 	
-	//Alta de tickets. Rellenar lista de artículos.
+	/**
+	 * Añade todos los artículos en la base de datos a la lista
+	 * @param listArticulos Lista, listado de los artículos
+	 */
 	public void listado(List listArticulos) 
 	{
 		try
@@ -223,7 +295,11 @@ public class Modelo
 		}
 	}
 	
-	//Consultar Tickets. Obtiene las líneas del ticket y las añade a un área de texto.
+	/**
+	 * Consulta las líneas de un ticket y las añade a un área de texto
+	 * @param textArea Área de texto, muestra las líneas de un ticket
+	 * @param idTicketFK Entero, Código ID del ticket
+	 */
 	public void rellenarTextArea(JTextArea textArea, int idTicketFK) 
 	{
 		try
@@ -243,7 +319,12 @@ public class Modelo
 		}
 	}
 	
-	//Consultar Tickets. Obtiene un dato específico del ticket y devuelve su valor.
+	/**
+	 * Lee el valor del campo de un ticket desde la base de datos
+	 * @param idTicket Entero, Código ID del ticket
+	 * @param campo Cadena, campo del que obtener el valor
+	 * @return Cadena, valor del campo
+	 */
 	public String datosTickets(int idTicket, String campo) 
 	{
 		String valor = "";
@@ -264,7 +345,12 @@ public class Modelo
 		return valor;
 	}
 	
-	//Consultar lista de tickets según intervalo de fechas.
+	/**
+	 * Consulta el listado de tickets que estén dentro del intervalo de fechas indicado
+	 * @param txaTickets Área de texto, muestra la lista de tickets tras aplicar el filtro
+	 * @param fechaDesde Cadena, fecha de inicio del intervalo
+	 * @param fechaHasta Cadena, fecha de fin del intervalo
+	 */
 	public void consultarListaTickets(JTextArea txaTickets, String fechaDesde, String fechaHasta)
 	{
 		try
@@ -287,14 +373,22 @@ public class Modelo
 	
 	//VARIOS
 	
-	//Transformar fecha de 2025-04-08 a 08/04/2025
+	/**
+	 * Transforma el formato de la fecha
+	 * @param fechaMySQL Cadena, fecha en formato aaaa-mm-dd
+	 * @return Cadena, fecha en formato dd/mm/aaaa
+	 */
 	public String fechaEuropea(String fechaMySQL)
 	{
 		String[] resultado = fechaMySQL.split("-");
 		return resultado[2] + "/" + resultado[1] + "/" + resultado[0];
 	}
 	
-	//Transformar fecha de 08/04/2025 a 2025-04-08
+	/**
+	 * Transforma el formato de la fecha
+	 * @param fechaEuropea Cadena, fecha en formato dd/mm/aaaa
+	 * @return Cadena, fecha en formato aaaa-mm-dd
+	 */
 	public String fechaMysql(String fechaEuropea)
 	{
 		String fechaDevuelta = "";
@@ -310,7 +404,10 @@ public class Modelo
 		return fechaDevuelta;
 	}
 	
-	//Rellenar comboBox artículos (Baja y Modificar)
+	/**
+	 * Añade la lista de artículos al desplegable
+	 * @param cbArticulos Lista desplegable, contiene los artículos de la base de datos
+	 */
 	public void rellenarArticulos(JComboBox<String> cbArticulos) 
 	{
 		try
@@ -329,7 +426,10 @@ public class Modelo
 		}
 	}
 	
-	//Rellenar comboBox tickets (Consultar)
+	/**
+	 * Añade la lista de tickets al desplegable
+	 * @param cbTickets Lista desplegable, contiene los tickets de la base de datos
+	 */
 	public void rellenarTickets(JComboBox<String> cbTickets) 
 	{
 		try

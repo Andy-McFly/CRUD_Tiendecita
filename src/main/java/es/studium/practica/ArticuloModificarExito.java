@@ -10,14 +10,35 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para el mensaje de Artículo Modificado con éxito
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloModificarExito 
 {
-	//VENTANA MODIFICACIÓN COMPLETADA
+	/**
+	 * Ventana de Mensaje de éxito en la Modificación
+	 */
+	private JFrame vExitoModificarArticulo;
+	/**
+	 * Botón Aceptar, vuelve al menú Artículos y cierra el mensaje
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public ArticuloModificarExito(JFrame vPrincipal) 
 	{
-		JFrame vExitoModificarArticulo = new JFrame();
+		vExitoModificarArticulo = new JFrame();
 		vExitoModificarArticulo.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		vExitoModificarArticulo.addWindowListener(new WindowAdapter() {
+		vExitoModificarArticulo.addWindowListener(new WindowAdapter() 
+		{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				new Articulos(vPrincipal);
@@ -33,9 +54,10 @@ public class ArticuloModificarExito
 		lblExitoModArticulo.setBounds(64, 50, 374, 25);
 		vExitoModificarArticulo.getContentPane().add(lblExitoModArticulo);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent ev) {
 				new Articulos(vPrincipal);
 				vExitoModificarArticulo.dispose();
 			}
@@ -48,7 +70,6 @@ public class ArticuloModificarExito
 		vExitoModificarArticulo.setSize(514,259);
 		vExitoModificarArticulo.setLocationRelativeTo(null);
 		vExitoModificarArticulo.setResizable(false);
-		
 		
 		vExitoModificarArticulo.setVisible(true);
 		vExitoModificarArticulo.requestFocusInWindow();

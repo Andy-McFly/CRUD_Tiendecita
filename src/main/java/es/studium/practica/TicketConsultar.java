@@ -11,14 +11,48 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para seleccionar un Ticket y consultar sus datos
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class TicketConsultar 
 {
-	//VENTANA CONSULTAR TICKETS
+	/**
+	 * Objeto de la Clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de selección de Ticket
+	 */
+	private JFrame vConsultarTicket;
+	/**
+	 * Desplegable con la lista de Tickets
+	 */
+	private JComboBox<String> cbTickets;
+	/**
+	 * Botón Ver Datos, si hay seleccionado un ticket, abre la ventana para ver sus datos
+	 */
+	private JButton btnVerDatos;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Tickets)
+	 */
+	private JButton btnVolver;
+	/**
+	 * Código ID del ticket seleccionado
+	 */
+	private int idTicket;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public TicketConsultar(JFrame vPrincipal) 
 	{
-		Modelo modelo = new Modelo();
-		 
-		JFrame vConsultarTicket = new JFrame();
+		vConsultarTicket = new JFrame();
 		vConsultarTicket.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		vConsultarTicket.addWindowListener(new WindowAdapter() 
 		{
@@ -33,7 +67,7 @@ public class TicketConsultar
 		vConsultarTicket.getContentPane().setBackground(new Color(204, 204, 255));
 		vConsultarTicket.getContentPane().setLayout(null);
 		
-		JComboBox<String> cbTickets = new JComboBox<>();
+		cbTickets = new JComboBox<>();
 		cbTickets.setModel(new DefaultComboBoxModel<>(new String[] {"Seleccione un Ticket..."}));
 		//Llama al método para rellenar el JComboBox con la lista de tickets.
 		modelo.rellenarTickets(cbTickets);
@@ -41,8 +75,7 @@ public class TicketConsultar
 		cbTickets.setBounds(82, 47, 198, 29);
 		vConsultarTicket.getContentPane().add(cbTickets);
 		
-		//Botón "Ver Datos".
-		JButton btnVerDatos = new JButton("Ver Datos");
+		btnVerDatos = new JButton("Ver Datos");
 		btnVerDatos.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -50,7 +83,7 @@ public class TicketConsultar
 				//Guarda el ID del ticket seleccionado y lo envía a la ventana para ver sus datos.
 				if(cbTickets.getSelectedIndex() != 0) 
 				{
-					int idTicket = Integer.parseInt(cbTickets.getSelectedItem().toString().split(" - ")[0]);
+					idTicket = Integer.parseInt(cbTickets.getSelectedItem().toString().split(" - ")[0]);
 					new TicketConsultarDatos(vPrincipal, idTicket);
 					vConsultarTicket.dispose();
 				}
@@ -65,10 +98,10 @@ public class TicketConsultar
 		btnVerDatos.setBounds(125, 162, 114, 44);
 		vConsultarTicket.getContentPane().add(btnVerDatos);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent ev) 
 			{
 				new Tickets(vPrincipal);
 				vConsultarTicket.dispose();
@@ -82,7 +115,6 @@ public class TicketConsultar
 		vConsultarTicket.setSize(383,315);
 		vConsultarTicket.setLocationRelativeTo(null);
 		vConsultarTicket.setResizable(false);
-		
 		
 		vConsultarTicket.setVisible(true);
 		vConsultarTicket.requestFocusInWindow();

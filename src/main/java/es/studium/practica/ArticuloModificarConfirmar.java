@@ -10,13 +10,44 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para confirmar la Modificación de Artículos
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloModificarConfirmar 
 {
+	/**
+	 * Objeto de la clase Modelo
+	 */
+	Modelo modelo = new Modelo();
+	/**
+	 * Ventana de confirmar Modificar Artículo
+	 */
+	private JFrame vConfModificarArticulo;
+	/**
+	 * Botón Aceptar, procede con la modificación y llama al mensaje de éxito o error
+	 */
+	private JButton btnAceptar;
+	/**
+	 * Botón Cancelar, cancela la operación de modificación y vuelve al menú Modificar Artículos
+	 */
+	private JButton btnCancelar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 * @param idArticulo Entero, Código ID del Artículo
+	 * @param descripcion Cadena, Descripción del artículo
+	 * @param precio Decimal, Precio del Artículo
+	 * @param stock Entero, Stock del Artículo
+	 */
 	public ArticuloModificarConfirmar(JFrame vPrincipal, int idArticulo, String descripcion, double precio, int stock) 
 	{
-		Modelo modelo = new Modelo();
-		
-		JFrame vConfModificarArticulo = new JFrame();
+		vConfModificarArticulo = new JFrame();
 		vConfModificarArticulo.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -34,13 +65,11 @@ public class ArticuloModificarConfirmar
 		vConfModificarArticulo.setResizable(false);
 		vConfModificarArticulo.getContentPane().setLayout(null);
 		
-		//Botón "Aceptar".
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				//Procede con la modificación.
 				if(modelo.modificarArticulo(idArticulo, descripcion, precio, stock)) 
 				{
 					new ArticuloModificarExito(vPrincipal);
@@ -59,7 +88,7 @@ public class ArticuloModificarConfirmar
 		btnAceptar.setBounds(95, 160, 116, 45);
 		vConfModificarArticulo.getContentPane().add(btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -84,7 +113,6 @@ public class ArticuloModificarConfirmar
 		lblConfModificar.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblConfModificar.setBounds(49, 43, 422, 25);
 		vConfModificarArticulo.getContentPane().add(lblConfModificar);
-		
 		
 		vConfModificarArticulo.setVisible(true);
 		vConfModificarArticulo.requestFocusInWindow();

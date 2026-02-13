@@ -10,14 +10,35 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase para el mensaje de Artículo Registrado con éxito
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class ArticuloAltaExito 
 {
-	//VENTANA REGISTRO COMPLETADO (Artículo)
+	/**
+	 * Ventana de Mensaje de éxito en el Alta
+	 */
+	private JFrame vExitoAltaArticulo;
+	/**
+	 * Botón Aceptar, vuelve al menú Artículos y cierra el mensaje
+	 */
+	private JButton btnAceptar;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public ArticuloAltaExito(JFrame vPrincipal) 
 	{
-		JFrame vExitoAltaArticulo = new JFrame();
+		vExitoAltaArticulo = new JFrame();
 		vExitoAltaArticulo.getContentPane().setBackground(new Color(220, 220, 220));
-		vExitoAltaArticulo.addWindowListener(new WindowAdapter() {
+		vExitoAltaArticulo.addWindowListener(new WindowAdapter() 
+		{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				new Articulos(vPrincipal);
@@ -36,7 +57,7 @@ public class ArticuloAltaExito
 		lblExitoAltaArticulo.setBounds(99, 52, 298, 25);
 		vExitoAltaArticulo.getContentPane().add(lblExitoAltaArticulo);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -50,7 +71,6 @@ public class ArticuloAltaExito
 		btnAceptar.setFont(new Font("Arial", Font.BOLD, 15));
 		btnAceptar.setBounds(194, 133, 107, 38);
 		vExitoAltaArticulo.getContentPane().add(btnAceptar);
-		
 		
 		vExitoAltaArticulo.setVisible(true);
 		vExitoAltaArticulo.requestFocusInWindow();

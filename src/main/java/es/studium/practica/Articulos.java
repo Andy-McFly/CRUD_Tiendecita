@@ -9,12 +9,48 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Clase para el menú de gestión de Artículos
+ * 
+ * @author Andrés Martínez Romero
+ * @since 1/10/2025
+ * @version 1.2
+ * 
+ */
 public class Articulos 
 {
-	//VENTANA TIENDECITA: ARTÍCULOS
+	/**
+	 * Ventana Artículos
+	 */
+	private JFrame vArticulos;
+	/**
+	 * Botón Consultar Artículos, abre la ventana para la consulta de Artículos
+	 */
+	private JButton btnConsArticulos;
+	/**
+	 * Botón Modificar Artículo, abre la ventana para seleccionar el Artículo a modificar
+	 */
+	private JButton btnModArticulo;
+	/**
+	 * Botón Registrar Artículo, abre la ventana para el alta de Artículos
+	 */
+	private JButton btnRegArticulo;
+	/**
+	 * Botón Borrar Artículo, abre la ventana para la baja de Artículos
+	 */
+	private JButton btnBorrarArticulo;
+	/**
+	 * Botón Volver, vuelve a la ventana anterior (Principal)
+	 */
+	private JButton btnVolverArticulo;
+	
+	/**
+	 * Constructor de la vista con eventos
+	 * @param vPrincipal JFrame, Ventana Principal
+	 */
 	public Articulos(JFrame vPrincipal) 
 	{
-		JFrame vArticulos = new JFrame();
+		vArticulos = new JFrame();
 		vArticulos.addWindowListener(new WindowAdapter() 
 		{
 			@Override
@@ -32,10 +68,8 @@ public class Articulos
 		vArticulos.setResizable(false);
 		vArticulos.getContentPane().setLayout(null);
 		
-		//Consultar artículos.
-		JButton btnConsArticulos = new JButton("Consultar Artículos");
+		btnConsArticulos = new JButton("Consultar Artículos");
 		btnConsArticulos.addActionListener(new ActionListener() 
-		
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -47,9 +81,7 @@ public class Articulos
 		btnConsArticulos.setFont(new Font("Arial", Font.BOLD, 20));
 		btnConsArticulos.setBounds(10, 39, 501, 60);
 		vArticulos.getContentPane().add(btnConsArticulos);
-		
-		//Modificar artículos.
-		JButton btnModArticulo = new JButton("Modificar Artículo");
+		btnModArticulo = new JButton("Modificar Artículo");
 		btnModArticulo.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -64,8 +96,7 @@ public class Articulos
 		btnModArticulo.setBounds(155, 203, 214, 50);
 		vArticulos.getContentPane().add(btnModArticulo);
 		
-		//Alta de artículos.
-		JButton btnRegArticulo = new JButton("Registrar Artículo");
+		btnRegArticulo = new JButton("Registrar Artículo");
 		btnRegArticulo.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -79,8 +110,7 @@ public class Articulos
 		btnRegArticulo.setBounds(155, 125, 214, 50);
 		vArticulos.getContentPane().add(btnRegArticulo);
 		
-		//Baja de artículos.
-		JButton btnBorrarArticulo = new JButton("Borrar Artículo");
+		btnBorrarArticulo = new JButton("Borrar Artículo");
 		btnBorrarArticulo.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -94,10 +124,11 @@ public class Articulos
 		btnBorrarArticulo.setFont(new Font("Arial", Font.BOLD, 18));
 		btnBorrarArticulo.setBounds(155, 280, 214, 50);
 		vArticulos.getContentPane().add(btnBorrarArticulo);
-		
-		JButton btnVolverArticulo = new JButton("Volver");
-		btnVolverArticulo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnVolverArticulo = new JButton("Volver");
+		btnVolverArticulo.addActionListener(new ActionListener() 
+		{
+			
+			public void actionPerformed(ActionEvent ev) {
 				vPrincipal.setVisible(true);
 				vArticulos.dispose();
 			}
@@ -107,7 +138,6 @@ public class Articulos
 		btnVolverArticulo.setFont(new Font("Arial", Font.BOLD, 13));
 		btnVolverArticulo.setBounds(416, 383, 95, 31);
 		vArticulos.getContentPane().add(btnVolverArticulo);
-		
 	
 		vArticulos.setVisible(true);
 		vArticulos.requestFocusInWindow();
