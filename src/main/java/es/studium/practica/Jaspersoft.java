@@ -28,6 +28,8 @@ public class Jaspersoft
 	 */
 	public Jaspersoft(String informe, HashMap<String, Object> parametros) 
 	{ 
+		Modelo modelo = new Modelo();
+		
 		try  
 		{ 
 			//Compilar el informe generando fichero jasper 
@@ -38,8 +40,8 @@ public class Jaspersoft
 			
 			//Conectar a la base de datos para sacar la información
 			String servidor = "jdbc:mysql://localhost:3306/tiendecitaamr?useSSL=false";
-			String usuarioDB = "adminTiendecita"; 
-			String passwordDB = "Studium2026;";
+			String usuarioDB = modelo.usuario; 
+			String passwordDB = modelo.clave;
 			Connection conexion = DriverManager.getConnection(servidor, usuarioDB, passwordDB);
 			
 			//Completar el informe con los datos de la base de datos

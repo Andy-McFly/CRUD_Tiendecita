@@ -41,11 +41,11 @@ public class Modelo
 	/**
 	 * Usuario de la base de datos
 	 */
-	private String usuario;
+	String usuario;
 	/**
 	 * contraseña de la base de datos
 	 */
-	private String contraseña;
+	String clave;
 
 	/**
 	 * Constructor de la clase.
@@ -62,10 +62,10 @@ public class Modelo
 			Class.forName(driver);
 			sourceURL = br.readLine();
 			usuario = br.readLine();
-			contraseña = br.readLine();
+			clave = br.readLine();
 			
 			//Acceso con los datos obtenidos.
-			dbcon = DriverManager.getConnection(sourceURL, usuario, contraseña);
+			dbcon = DriverManager.getConnection(sourceURL, usuario, clave);
 			sentencia = dbcon.createStatement();
 			
 			br.close();
